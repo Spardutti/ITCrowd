@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { addBrand } from "../../controllers/brandController/post_brand";
+import { updateProduct } from "../../controllers/productController/put_product";
 import passport from "passport";
 
 const router = Router();
 
 const jwtProtected = passport.authenticate("jwt", { session: false });
 
-/* CREATE BRAND */
-router.post("/brand", jwtProtected, addBrand);
+/* UPDATE PRODUCT */
+router.put("/product", jwtProtected, updateProduct);
 
 export { router };

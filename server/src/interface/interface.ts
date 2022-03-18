@@ -12,3 +12,10 @@ export interface Brand {
   name: string;
   logo_url: string;
 }
+
+export interface User {
+  username: string;
+  password: string;
+  email: string;
+  isAdmin: boolean;
+}

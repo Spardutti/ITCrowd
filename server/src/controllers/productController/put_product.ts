@@ -9,5 +9,22 @@ const updateProduct = async (
 ) => {
   try {
     const { name, description, image_url, price, brand, id } = req.body;
-  } catch (error) {}
+    const product = await ProductModel.findOneAndUpdate(
+      id,
+      {
+        name,
+        description,
+        image_url,
+        price,
+        brand,
+      },
+      { new: true }
+    );
+
+    res.status(200).json(product);
+  } catch (error) {
+    return next(error);
+  }
 };
+
+export { updateProduct };

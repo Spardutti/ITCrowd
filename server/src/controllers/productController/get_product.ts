@@ -15,4 +15,15 @@ const getAllProducts = async (
   }
 };
 
-export { getAllProducts };
+/* GET PRODUCT BY ID */
+const getProduct = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.body;
+    const product = await ProductModel.findById(id);
+    res.status(200).json(product);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export { getAllProducts, getProduct };

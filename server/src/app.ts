@@ -4,11 +4,17 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import { router as indexRouter } from "./routes/routes";
-require("dotenv").config();
 import cors from "cors";
-import mongoose, { ConnectOptions } from "mongoose";
+import mongoose from "mongoose";
+import passport from "passport";
+import session from "express-session";
+import dotenv from "dotenv";
+dotenv.config();
 
 import { Request, Response, NextFunction, Application } from "express";
+
+require("./Auth/passport-local");
+require("./Auth/jwt");
 
 const app: Application = express();
 app.use(cors());
@@ -29,6 +35,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET as string,
+    resave: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/products", indexRouter);
 
 // catch 404 and forward to error handler
@@ -44,7 +60,7 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 
   // render the error page
   res.status(err.status || 500);
-  res.json("error");
+  res.json(err.message);
 });
 
 const port: any | number = process.env.PORT || 5000;
