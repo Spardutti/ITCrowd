@@ -2,6 +2,7 @@ import { Button, HStack, Input } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNewBrand } from "../../Api/Brands/post_brand";
+import FormLayout from "../User/FormLayout";
 
 interface AddBrandProps {}
 
@@ -61,7 +62,7 @@ const AddBrand: React.FC<AddBrandProps> = () => {
   return (
     <>
       {show ? (
-        <>
+        <FormLayout>
           <Input placeholder="Brand name" name="brand" onChange={onBrand} />
           <Input type={"file"} name="logo" onChange={onImage} />
           <HStack>
@@ -70,7 +71,7 @@ const AddBrand: React.FC<AddBrandProps> = () => {
             </Button>
             <Button onClick={toggle}>Close</Button>
           </HStack>
-        </>
+        </FormLayout>
       ) : (
         <Button onClick={toggle}>Add Brand</Button>
       )}

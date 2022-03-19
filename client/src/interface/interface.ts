@@ -3,9 +3,15 @@ export interface Product {
   name: string;
   description: string;
   image_url: string;
-  price: number;
+  price: string;
   brand: {
     name: string;
     logo_url: string;
   };
+}
+
+export interface Brand {
+  _id: string;
+  name: string;
+  logo_url: string;
 }

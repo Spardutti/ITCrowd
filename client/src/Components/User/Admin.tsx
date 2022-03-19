@@ -30,6 +30,7 @@ const Admin: React.FC<AdminProps> = () => {
     };
     const response = await guest(guestInfo);
     if (response.status === 200) {
+      localStorage.setItem("itcrowd", response.data.token);
       navigate("/products");
     }
   };
