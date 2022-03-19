@@ -8,10 +8,10 @@ export const addBrand = async (
   next: NextFunction
 ) => {
   try {
-    const { name, logo_url } = req.body;
+    const { name } = req.body;
     const brand = new BrandModel({
       name,
-      logo_url,
+      logo_url: req.file?.path,
     });
 
     await brand.save();
