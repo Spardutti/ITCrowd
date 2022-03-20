@@ -68,7 +68,7 @@ const Products: React.FC<ProductsProps> = () => {
 
   return (
     <Stack align={"center"} p={10}>
-      <Heading textAlign={"center"} color="orange" fontSize={50}>
+      <Heading textAlign={"center"} color="#111" fontSize={50}>
         ITCrowd Departament Store
       </Heading>
       <ProductSearch />
@@ -81,7 +81,7 @@ const Products: React.FC<ProductsProps> = () => {
       <HStack>
         {pagination.skip === "0" ? null : (
           <Button
-            colorScheme={"orange"}
+            colorScheme={"blackAlpha"}
             isLoading={isLoading}
             onClick={fetchLess}
           >
@@ -90,7 +90,7 @@ const Products: React.FC<ProductsProps> = () => {
         )}
         {data?.data.length !== 4 ? null : (
           <Button
-            colorScheme={"orange"}
+            colorScheme={"blackAlpha"}
             isLoading={isLoading}
             onClick={fetchMore}
           >

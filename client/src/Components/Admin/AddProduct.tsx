@@ -96,7 +96,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
 
   return show ? (
     <FormLayout>
-      <Box bg="#fafafa" p={5} borderRadius={"md"}>
+      <Box bg="#DDD" p={5} borderRadius={"md"}>
         <Input
           name="name"
           value={product.name}
@@ -104,6 +104,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
           placeholder="Product name"
           borderColor={"black"}
           my={1}
+          bg="#fff"
         />
         <Input
           name="description"
@@ -112,6 +113,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
           placeholder="Product description"
           borderColor={"black"}
           my={1}
+          bg="#fff"
         />
         <Input
           name="price"
@@ -120,6 +122,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
           placeholder="Product price"
           borderColor={"black"}
           my={1}
+          bg="#fff"
           type="number"
         />
         <FormLabel m={0}>Product logo</FormLabel>
@@ -130,6 +133,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
           p={1}
           borderColor={"black"}
           my={1}
+          bg="#fff"
         />
 
         <Select
@@ -161,7 +165,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
       </Box>
     </FormLayout>
   ) : (
-    <Button colorScheme={"orange"} onClick={toggle}>
+    <Button colorScheme={"blackAlpha"} onClick={toggle}>
       Add Product
     </Button>
   );

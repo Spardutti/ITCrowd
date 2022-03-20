@@ -10,6 +10,7 @@ import {
   Image,
   Text,
   HStack,
+  Stack,
 } from "@chakra-ui/react";
 import { Product } from "../../interface/interface";
 
@@ -28,22 +29,23 @@ const ProductModal: React.FC<ProductModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg={"#DDD"}>
         <ModalHeader textAlign={"center"} fontWeight="bold" fontSize={30}>
           {name}
         </ModalHeader>
         <ModalBody textAlign={"center"}>
-          <Image src={image_url} borderRadius="md" />
+          <Stack justify={"center"} align="center">
+            <Image src={image_url} borderRadius="md" />
+          </Stack>
           <Text>{description}</Text>
           <Text>Price: {price}$</Text>
-          <HStack justify="space-around">
-            {/* <Text>{brand.name}</Text> */}
+          <HStack justify="center">
             <Image src={brand.logo_url} maxH={200} borderRadius="md" />
           </HStack>
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Button colorScheme="blackAlpha" mr={3} onClick={onClose}>
             Close
           </Button>
         </ModalFooter>
@@ -53,4 +55,3 @@ const ProductModal: React.FC<ProductModalProps> = ({
 };
 
 export default ProductModal;
-<p>hola</p>;

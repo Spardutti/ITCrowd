@@ -1,9 +1,9 @@
 import {
-  Box,
   Button,
   Heading,
   HStack,
   Image,
+  Stack,
   Text,
   useBreakpointValue,
   useDisclosure,
@@ -19,6 +19,7 @@ import { useDeleteProduct } from "../../Api/Products/delete_products";
 import { useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 import EditModal from "./EditModal";
+import { motion } from "framer-motion";
 
 /* RENDERS A CARD FOR EACH PRODUCT */
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
@@ -65,25 +66,32 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   }, [data]);
 
   const buttonSize = useBreakpointValue(["xs", "sm", "md"]);
+  const MotionStack = motion(VStack);
   return (
-    <VStack
+    <MotionStack
+      whileHover={{
+        scale: [1, 1.1],
+        rotate: [0, -5],
+        transition: { duration: 0.1 },
+      }}
       w={[150, 200, 250, 300, 400]}
-      maxH={[400]}
-      bg="#fafafa"
+      maxH={[300, 400]}
+      bg="#DDD"
       py={5}
       px={2}
       m={[2, 5, 10]}
       borderRadius="lg"
       onClick={onOpen}
+      cursor="pointer"
     >
-      <Box h={200}>
+      <Stack align={"center"} justify="center" h={200}>
         <Image
           src={image_url}
           maxW={[150, 200, 250, 350]}
           maxH={200}
           borderRadius="lg"
         />
-      </Box>
+      </Stack>
       <Heading
         fontSize={name.length > 16 ? [13, 20] : [20, 20]}
         textAlign={"center"}
@@ -121,7 +129,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           product={product}
         />
       )}
-    </VStack>
+    </MotionStack>
   );
 };
 

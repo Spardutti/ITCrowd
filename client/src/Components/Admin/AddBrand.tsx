@@ -67,13 +67,14 @@ const AddBrand: React.FC<AddBrandProps> = () => {
     <>
       {show ? (
         <FormLayout>
-          <Box bg="#fafafa" p={5} borderRadius={"md"}>
+          <Box bg="#DDD" p={5} borderRadius={"md"}>
             <Input
               placeholder="Brand name"
               name="brand"
               onChange={onBrand}
               borderColor="black"
               my={1}
+              bg="#fff"
             />
             <FormLabel m={0}>Brand Logo</FormLabel>
             <Input
@@ -82,6 +83,7 @@ const AddBrand: React.FC<AddBrandProps> = () => {
               name="logo"
               onChange={onImage}
               borderColor="black"
+              bg="#fff"
             />
             <HStack pt={3}>
               <Button
@@ -99,7 +101,7 @@ const AddBrand: React.FC<AddBrandProps> = () => {
           </Box>
         </FormLayout>
       ) : (
-        <Button colorScheme={"orange"} onClick={toggle}>
+        <Button colorScheme={"blackAlpha"} onClick={toggle}>
           Add Brand
         </Button>
       )}
