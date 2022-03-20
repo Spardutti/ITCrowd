@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useGetAllProducts } from "../../Api/Products/get_products";
 import { Product } from "../../interface/interface";
 import ProductCard from "./ProductCard";
+import ProductSearch from "./ProductSearch";
 
 interface ProductsProps {}
 
@@ -26,6 +27,7 @@ const Products: React.FC<ProductsProps> = () => {
 
   return (
     <div>
+      <ProductSearch />
       {data?.data.map((elem: Product, index: number) => {
         return <ProductCard product={elem} key={index} />;
       })}

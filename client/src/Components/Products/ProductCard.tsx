@@ -12,17 +12,22 @@ import { useGetUser } from "../../Api/User/get_user";
 import { Product } from "../../interface/interface";
 import ProductModal from "./ProductModal";
 
+/* RENDERS A CARD FOR EACH PRODUCT */
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const { name, image_url, price, brand } = product;
   const [user, setUser] = useState<{ isAdmin: false }>();
   const [token, setToken] = useState("");
+
   /* MODAL CONTROLLERS */
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  /* GET JWT TOKEN */
   useEffect(() => {
     const token = localStorage.getItem("itcrowd");
     if (token) setToken(token);
   }, []);
+
+  /* GET USER DATA TO CHECK IF ISADMIN */
   const { data, isLoading } = useGetUser(token);
 
   useEffect(() => {

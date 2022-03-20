@@ -6,11 +6,9 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Button,
   Image,
   Text,
-  Box,
   HStack,
 } from "@chakra-ui/react";
 import { Product } from "../../interface/interface";
