@@ -68,4 +68,4 @@ npm run dev // to run the server locally
 npm i // to install dependencies. this will take a while
 npm start
 ```
-if your browser does not open automatocally, navigate to [localhost:3000](http://localhost:3000)
+if your browser does not open automatocally, navigate to  [localhost:3000](http://localhost:3000) (CTRL + CLICK ) to open in a new tab
