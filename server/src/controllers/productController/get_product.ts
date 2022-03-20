@@ -29,7 +29,7 @@ const getAllProducts = async (
 const getProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const product = await ProductModel.findById(id);
+    const product = await ProductModel.findById(id).populate("brand");
 
     res.status(200).json(product);
   } catch (error) {
