@@ -16,10 +16,56 @@ Framer-Motion for animations, React Hot Toast for toasts messages, React Router,
 
 Back End was made using Multer for file uploads, Cloudinary as image hosting, Passport and Jwt for authentication, BcryptJs for encription of passwords, MongoDb as the database.
 
+The api workflow is: you log in as admin, create a brand (you cant create a product without a brand ), create a product.
+As an user you can browser the products and search products by name.
+
+## ENDPOINTS
+
+The api expose various endpoints, as requested all are /products/${endpoint}
+
+## GET ENDPOINTS
+
+/brands - get a list of all brands
+
+/ - get all products
+/product/:id - get a specific product by its id
+
+/user - get the current logged user info
+
+## POST ENDPOINTS
+
+/brand - creates a new brand
+
+/product - creates a new product
+
+/newuser - creates a new user
+/localuser - log in user
+
+## PUT ENDPOINTS
+
+/product - updates selected product.
+
+## DELETE ENDPOINTS
+
+/delete/:id - deletes a specific product by its id
+
+
+
 ## IN PROGRESS
 
 ## Getting Started
 
-```
+To run the project locally:
 
+1- clone the repo
+2- open the server folder in VsCode or any other IDE
 ```
+npm i // to install all dependencies
+npm run dev // to run the server locally
+```
+3 - open the client folder in VsCode or any other IDE
+```
+npm i // to install dependencies. this will take a while
+npm start
+```
+if your browser does not open automatocally, navigate to [localhost:3000](http://localhost:3000)
