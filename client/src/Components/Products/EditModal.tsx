@@ -31,13 +31,14 @@ const EditModal: React.FC<EditModalProps> = ({
 }) => {
   const [brands, setBrands] = useState([]);
   const [logo, setLogo] = useState<File>();
-  const [brandId, setBrandId] = useState("");
+  const [brandId, setBrandId] = useState(product.brand._id);
   const [updateProduct, setUpdateProduct] = useState<Product>({
     _id: product._id,
     name: product.name,
     description: product.description,
     price: product.price,
     brand: {
+      _id: brandId,
       name: product.brand.name,
       logo_url: product.brand.logo_url,
     },

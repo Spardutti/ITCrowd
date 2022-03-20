@@ -5,6 +5,7 @@ export interface Product {
   image_url: string;
   price: string;
   brand: {
+    _id: string;
     name: string;
     logo_url: string;
   };

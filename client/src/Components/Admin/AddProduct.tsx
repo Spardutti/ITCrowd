@@ -18,6 +18,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
     description: "",
     price: "",
     brand: {
+      _id: "",
       name: "",
       logo_url: "",
     },
