@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/itcrowd/static/js/main.3c221b4d.js",
-    "index.html": "/itcrowd/index.html",
-    "main.3c221b4d.js.map": "/itcrowd/static/js/main.3c221b4d.js.map"
+    "main.js": "/ITCrowd/static/js/main.3c221b4d.js",
+    "index.html": "/ITCrowd/index.html",
+    "main.3c221b4d.js.map": "/ITCrowd/static/js/main.3c221b4d.js.map"
   },
   "entrypoints": [
     "static/js/main.3c221b4d.js"
