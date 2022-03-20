@@ -6,6 +6,7 @@ import { Brand, Product } from "../../interface/interface";
 import FormLayout from "../User/FormLayout";
 import Select from "react-select";
 import toast from "react-hot-toast";
+import { useQueryClient } from "react-query";
 
 interface AddProductProps {}
 
@@ -68,6 +69,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
   }, [data]);
 
   /* CREATE PRODUCT */
+  const queryClient = useQueryClient();
   const createProduct = async () => {
     if (logo) {
       const info = {
@@ -86,6 +88,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
           description: "",
           price: "",
         });
+        queryClient.invalidateQueries("products");
       }
       toggle();
     }

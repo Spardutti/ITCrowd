@@ -1,4 +1,11 @@
-import { Box, Button, HStack, SimpleGrid, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  SimpleGrid,
+  Stack,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useGetAllProducts } from "../../Api/Products/get_products";
 import { useGetUser } from "../../Api/User/get_user";
@@ -61,9 +68,12 @@ const Products: React.FC<ProductsProps> = () => {
 
   return (
     <Stack align={"center"} p={10}>
+      <Heading textAlign={"center"} color="orange" fontSize={50}>
+        ITCrowd Departament Store
+      </Heading>
       <ProductSearch />
       {user?.isAdmin ? <Panel /> : null}
-      <SimpleGrid gridTemplateColumns={"repeat(2, 1fr)"}>
+      <SimpleGrid gridTemplateColumns={"repeat(2, 6fr)"} pt={20}>
         {data?.data.map((elem: Product, index: number) => {
           return <ProductCard product={elem} key={index} />;
         })}

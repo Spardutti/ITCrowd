@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNewBrand } from "../../Api/Brands/post_brand";
 import FormLayout from "../User/FormLayout";
+import { useQueryClient } from "react-query";
 
 interface AddBrandProps {}
 
@@ -48,6 +49,8 @@ const AddBrand: React.FC<AddBrandProps> = () => {
     });
   };
 
+  /* CREATE A NEW BRAND */
+  const queryClient = useQueryClient();
   const createBrand = async () => {
     if (brand.img) {
       const info = { name: brand.name, token: brand.token, logo: brand.img };
@@ -55,6 +58,7 @@ const AddBrand: React.FC<AddBrandProps> = () => {
       if (response.status === 200) {
         toast.success("Brand Created");
         toggle();
+        queryClient.invalidateQueries("brands");
       }
     }
   };

@@ -36,10 +36,9 @@ const ProductModal: React.FC<ProductModalProps> = ({
           <Image src={image_url} borderRadius="md" />
           <Text>{description}</Text>
           <Text>Price: {price}$</Text>
-          <Text fontWeight={"medium"}>Brand</Text>
           <HStack justify="space-around">
-            <Text>{brand.name}</Text>
-            <Image src={brand.logo_url} h={100} borderRadius="md" />
+            {/* <Text>{brand.name}</Text> */}
+            <Image src={brand.logo_url} maxH={200} borderRadius="md" />
           </HStack>
         </ModalBody>
 

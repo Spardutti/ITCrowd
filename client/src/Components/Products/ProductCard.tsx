@@ -1,9 +1,11 @@
 import {
+  Box,
   Button,
   Heading,
   HStack,
   Image,
   Text,
+  useBreakpointValue,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
@@ -62,19 +64,33 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     if (data) setUser(data.data);
   }, [data]);
 
+  const buttonSize = useBreakpointValue(["xs", "sm", "md"]);
   return (
     <VStack
-      w={400}
-      h={400}
+      w={[150, 200, 250, 300, 400]}
+      maxH={[400]}
       bg="#fafafa"
-      p={5}
-      m={10}
+      py={5}
+      px={2}
+      m={[2, 5, 10]}
       borderRadius="lg"
       onClick={onOpen}
     >
-      <Image src={image_url} w={350} h={200} borderRadius="lg" />
-      <Heading textAlign={"center"}>{name}</Heading>
-      <Text textAlign={"center"}>{brand.name}</Text>
+      <Box h={200}>
+        <Image
+          src={image_url}
+          maxW={[150, 200, 250, 350]}
+          maxH={200}
+          borderRadius="lg"
+        />
+      </Box>
+      <Heading
+        fontSize={name.length > 16 ? [13, 20] : [20, 20]}
+        textAlign={"center"}
+        h={[5, 10]}
+      >
+        {name}
+      </Heading>
       <Text textAlign={"center"}>Price: {price}$</Text>
       {user && user.isAdmin ? (
         <HStack justify={"center"} onClick={(e) => e.stopPropagation()}>
@@ -82,10 +98,12 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             colorScheme={"green"}
             leftIcon={<FaEdit />}
             onClick={onEditOpen}
+            size={buttonSize}
           >
             Edit
           </Button>
           <Button
+            size={buttonSize}
             colorScheme={"red"}
             leftIcon={<AiFillDelete />}
             onClick={deleteProduct}
