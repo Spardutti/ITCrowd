@@ -4,7 +4,7 @@
 
 ## Description
 
-RESTfull webapp, where the user can navigate and search for different products,
+RESTfull webapp, fully responsive (or at least i hope so!)  where the user can navigate and search for different products,
 each product have a detailed view where it display all the product information.
 
 As an Admin you will be able to create products and brands, delete and edit products.
@@ -48,10 +48,6 @@ The api expose various endpoints, as requested all are /products/${endpoint}
 ## DELETE ENDPOINTS
 
 /delete/:id - deletes a specific product by its id
-
-
-
-## IN PROGRESS
 
 ## Getting Started
 
