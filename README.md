@@ -19,6 +19,8 @@ Back End was made using Multer for file uploads, Cloudinary as image hosting, Pa
 The api workflow is: you log in as admin, create a brand (you cant create a product without a brand ), create a product.
 As an user you can browser the products and search products by name.
 
+The client is hosted in GitHub, and the server is hosted in Heroku.
+
 ## ENDPOINTS
 
 The api expose various endpoints, as requested all are /products/${endpoint}
