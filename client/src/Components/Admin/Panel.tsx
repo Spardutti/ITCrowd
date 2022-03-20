@@ -1,5 +1,5 @@
-import { Box, Button, HStack, Input } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { HStack } from "@chakra-ui/react";
+import React from "react";
 import AddBrand from "./AddBrand";
 import AddProduct from "./AddProduct";
 

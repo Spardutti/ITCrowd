@@ -1,4 +1,4 @@
-import { Button, HStack, Input, Stack, Text } from "@chakra-ui/react";
+import { Button, HStack, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNewUser } from "../../Api/User/post_user";

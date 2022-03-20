@@ -1,4 +1,4 @@
-import { Box, Modal, useDisclosure } from "@chakra-ui/react";
+import { Box, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import ReactSearchBox from "react-search-box";
 import {
@@ -33,11 +33,11 @@ const ProductSearch: React.FC<ProductSearchProps> = () => {
   /* MODAL CONTROLLER */
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { data: allProducts, isLoading } = useGetAllProducts(pagination);
+  const { data: allProducts } = useGetAllProducts(pagination);
 
   const {
     data: productInfo,
-    isLoading: isProduct,
+
     refetch,
   } = useGetProduct(productId);
 

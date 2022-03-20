@@ -23,7 +23,7 @@ import { motion } from "framer-motion";
 
 /* RENDERS A CARD FOR EACH PRODUCT */
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
-  const { name, image_url, price, brand } = product;
+  const { name, image_url, price } = product;
   const [user, setUser] = useState<{ isAdmin: false }>();
   const [token, setToken] = useState("");
 

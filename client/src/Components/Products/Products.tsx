@@ -1,12 +1,6 @@
-import {
-  Box,
-  Button,
-  Heading,
-  HStack,
-  SimpleGrid,
-  Stack,
-} from "@chakra-ui/react";
+import { Button, Heading, HStack, SimpleGrid, Stack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGetAllProducts } from "../../Api/Products/get_products";
 import { useGetUser } from "../../Api/User/get_user";
 import { Product } from "../../interface/interface";
@@ -40,12 +34,14 @@ const Products: React.FC<ProductsProps> = () => {
     token && refetch();
   }, [token]);
 
+  /* SETS THE USER INFO */
   useEffect(() => {
     if (userInfo) {
       setUser(userInfo.data);
     }
   }, [userInfo]);
 
+  /* FETCH MORE PRODUCTS */
   const fetchMore = () => {
     let limit = parseInt(pagination.skip);
     limit += 4;
@@ -55,6 +51,7 @@ const Products: React.FC<ProductsProps> = () => {
     });
   };
 
+  /* PREVIOUS PAGE */
   const fetchLess = () => {
     let limit = parseInt(pagination.skip);
     limit -= 4;
@@ -64,7 +61,12 @@ const Products: React.FC<ProductsProps> = () => {
     });
   };
 
-  if (isLoading) return <LoadingSpinner />;
+  /* FAKE LOGOUT  */
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("itcrowd");
+    navigate("/");
+  };
 
   return (
     <Stack align={"center"} p={10}>
@@ -72,32 +74,43 @@ const Products: React.FC<ProductsProps> = () => {
         ITCrowd Departament Store
       </Heading>
       <ProductSearch />
-      {user?.isAdmin ? <Panel /> : null}
-      <SimpleGrid gridTemplateColumns={"repeat(2, 6fr)"} pt={20}>
-        {data?.data.map((elem: Product, index: number) => {
-          return <ProductCard product={elem} key={index} />;
-        })}
-      </SimpleGrid>
       <HStack>
-        {pagination.skip === "0" ? null : (
-          <Button
-            colorScheme={"blackAlpha"}
-            isLoading={isLoading}
-            onClick={fetchLess}
-          >
-            Prev
-          </Button>
-        )}
-        {data?.data.length !== 4 ? null : (
-          <Button
-            colorScheme={"blackAlpha"}
-            isLoading={isLoading}
-            onClick={fetchMore}
-          >
-            Next
-          </Button>
-        )}
+        {user?.isAdmin ? <Panel /> : null}
+        <Button colorScheme={"blackAlpha"} onClick={logout}>
+          Log out
+        </Button>
       </HStack>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <SimpleGrid gridTemplateColumns={"repeat(2, 6fr)"} pt={20}>
+            {data?.data.map((elem: Product, index: number) => {
+              return <ProductCard product={elem} key={index} />;
+            })}
+          </SimpleGrid>
+          <HStack>
+            {pagination.skip === "0" ? null : (
+              <Button
+                colorScheme={"blackAlpha"}
+                isLoading={isLoading}
+                onClick={fetchLess}
+              >
+                Prev
+              </Button>
+            )}
+            {data?.data.length !== 4 ? null : (
+              <Button
+                colorScheme={"blackAlpha"}
+                isLoading={isLoading}
+                onClick={fetchMore}
+              >
+                Next
+              </Button>
+            )}
+          </HStack>
+        </>
+      )}
     </Stack>
   );
 };
