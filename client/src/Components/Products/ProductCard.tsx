@@ -90,7 +90,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           <Image
             src={image_url}
             maxW={[150, 200, 250, 350]}
-            maxH={200}
+            maxH={150}
             borderRadius="lg"
           />
         </Stack>

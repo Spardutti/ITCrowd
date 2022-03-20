@@ -73,7 +73,7 @@ const AddBrand: React.FC<AddBrandProps> = () => {
       const response = await mutateAsync(info);
       if (response.status === 200) {
         toast.success("Brand Created");
-        toggle();
+        onClose();
         queryClient.invalidateQueries("brands");
       }
     }
