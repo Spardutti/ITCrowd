@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useLocalLogin } from "../../Api/User/post_user";
 import { useNavigate } from "react-router-dom";
 import FormLayout from "./FormLayout";
+import toast from "react-hot-toast";
 
 interface LoginProps {}
 
@@ -31,6 +32,7 @@ const Login: React.FC<LoginProps> = () => {
       navigate("/products");
       return;
     }
+    toast.error(response.data);
   };
 
   return (
