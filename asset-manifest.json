@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/ITCrowd/static/js/main.cdbe83c1.js",
+    "main.js": "/ITCrowd/static/js/main.c42b38d3.js",
     "index.html": "/ITCrowd/index.html",
-    "main.cdbe83c1.js.map": "/ITCrowd/static/js/main.cdbe83c1.js.map"
+    "main.c42b38d3.js.map": "/ITCrowd/static/js/main.c42b38d3.js.map"
   },
   "entrypoints": [
-    "static/js/main.cdbe83c1.js"
+    "static/js/main.c42b38d3.js"
   ]
 }
