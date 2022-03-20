@@ -1,4 +1,17 @@
-import { Box, Button, FormLabel, HStack, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormLabel,
+  HStack,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+  useBreakpointValue,
+  useDisclosure,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useAllBrands } from "../../Api/Brands/get_brands";
 import { useNewProduct } from "../../Api/Products/post_product";
@@ -11,7 +24,6 @@ import { useQueryClient } from "react-query";
 interface AddProductProps {}
 
 const AddProduct: React.FC<AddProductProps> = () => {
-  const [show, setShow] = useState(false);
   const [product, setProduct] = useState<Product>({
     _id: "",
     name: "",
@@ -29,9 +41,6 @@ const AddProduct: React.FC<AddProductProps> = () => {
   const [token, setToken] = useState("");
   const [brandId, setBrandId] = useState("");
   const [brands, setBrands] = useState([]);
-
-  /* TOGGLE FORM */
-  const toggle = () => setShow(!show);
 
   /* UPDATE PRODUCT INFORMATION */
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,85 +99,98 @@ const AddProduct: React.FC<AddProductProps> = () => {
           price: "",
         });
         queryClient.invalidateQueries("products");
+        onClose();
       }
-      toggle();
     }
   };
 
-  return show ? (
-    <FormLayout>
-      <Box bg="#DDD" p={5} borderRadius={"md"}>
-        <Input
-          name="name"
-          value={product.name}
-          onChange={onChange}
-          placeholder="Product name"
-          borderColor={"black"}
-          my={1}
-          bg="#fff"
-        />
-        <Input
-          name="description"
-          value={product.description}
-          onChange={onChange}
-          placeholder="Product description"
-          borderColor={"black"}
-          my={1}
-          bg="#fff"
-        />
-        <Input
-          name="price"
-          value={product.price}
-          onChange={onChange}
-          placeholder="Product price"
-          borderColor={"black"}
-          my={1}
-          bg="#fff"
-          type="number"
-        />
-        <FormLabel m={0}>Product logo</FormLabel>
-        <Input
-          type="file"
-          name="logo"
-          onChange={onLogo}
-          p={1}
-          borderColor={"black"}
-          my={1}
-          bg="#fff"
-        />
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const modalSize = useBreakpointValue(["xs", "md"]);
 
-        <Select
-          placeholder="Select a brand"
-          options={brands}
-          onChange={(e: any) => setBrandId(e?.value)}
-        />
-        <HStack mt={1} justify="center">
-          <Button
-            colorScheme={"blue"}
-            onClick={createProduct}
-            isLoading={isLoading}
-            disabled={
-              !product.name ||
-              !product.description ||
-              !product.price ||
-              !logo ||
-              !brandId
-                ? true
-                : false
-            }
-          >
-            Create Product
-          </Button>
-          <Button colorScheme={"red"} onClick={toggle}>
-            Close
-          </Button>
-        </HStack>
-      </Box>
-    </FormLayout>
-  ) : (
-    <Button colorScheme={"blackAlpha"} onClick={toggle}>
-      Add Product
-    </Button>
+  return (
+    <>
+      <Modal isOpen={isOpen} onClose={onClose} size={modalSize} isCentered>
+        <ModalOverlay />
+        <ModalContent bg="#ddd" p={5} pt={10}>
+          <ModalBody textAlign={"center"}>
+            <Input
+              autoComplete="off"
+              name="name"
+              value={product.name}
+              onChange={onChange}
+              placeholder="Product name"
+              borderColor={"black"}
+              my={1}
+              bg="#fff"
+            />
+            <Input
+              autoComplete="off"
+              name="description"
+              value={product.description}
+              onChange={onChange}
+              placeholder="Product description"
+              borderColor={"black"}
+              my={1}
+              bg="#fff"
+            />
+            <Input
+              autoComplete="off"
+              name="price"
+              value={product.price}
+              onChange={onChange}
+              placeholder="Product price"
+              borderColor={"black"}
+              my={1}
+              bg="#fff"
+              type="number"
+            />
+            <FormLabel m={0}>Product logo</FormLabel>
+            <Input
+              type="file"
+              name="logo"
+              onChange={onLogo}
+              p={1}
+              borderColor={"black"}
+              bg="#fff"
+              my={1}
+            />
+
+            <Select
+              placeholder="Select a brand"
+              options={brands}
+              onChange={(e: any) => setBrandId(e?.value)}
+            />
+            <HStack mt={1} justify="center">
+              <Button
+                colorScheme={"blue"}
+                onClick={createProduct}
+                isLoading={isLoading}
+                disabled={
+                  !product.name ||
+                  !product.description ||
+                  !product.price ||
+                  !logo ||
+                  !brandId
+                    ? true
+                    : false
+                }
+              >
+                Create Product
+              </Button>
+              <Button colorScheme={"red"} onClick={onClose}>
+                Close
+              </Button>
+            </HStack>
+          </ModalBody>
+
+          <ModalFooter></ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Button colorScheme={"blackAlpha"} onClick={onOpen}>
+        Add Product
+      </Button>
+    </>
   );
 };
 

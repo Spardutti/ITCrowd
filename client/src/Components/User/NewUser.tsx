@@ -42,20 +42,24 @@ const NewUser: React.FC<NewUserProps> = () => {
         Create account
       </Text>
       <Input
+        autoComplete="off"
         my={1}
         name="username"
         value={userInfo.username}
         placeholder="Username"
         onChange={onChange}
         borderColor="black"
+        bg="#fff"
       />
 
       <Input
+        autoComplete="off"
         borderColor="black"
         name="password"
         value={userInfo.password}
         placeholder="Password"
         onChange={onChange}
+        bg="#fff"
       />
       <HStack justify={"center"} mt={5}>
         <Button

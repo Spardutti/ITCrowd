@@ -1,4 +1,17 @@
-import { Box, Button, FormLabel, HStack, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormLabel,
+  HStack,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+  useBreakpointValue,
+  useDisclosure,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNewBrand } from "../../Api/Brands/post_brand";
@@ -35,6 +48,9 @@ const AddBrand: React.FC<AddBrandProps> = () => {
 
   const { mutateAsync, isLoading } = useNewBrand();
 
+  /* MODAL CONTROLS */
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const onBrand = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBrand({
       ...brand,
@@ -63,48 +79,56 @@ const AddBrand: React.FC<AddBrandProps> = () => {
     }
   };
 
+  const modalSize = useBreakpointValue(["xs", "md"]);
+
   return (
     <>
-      {show ? (
-        <FormLayout>
-          <Box bg="#DDD" p={5} borderRadius={"md"}>
-            <Input
-              placeholder="Brand name"
-              name="brand"
-              onChange={onBrand}
-              borderColor="black"
-              my={1}
-              bg="#fff"
-            />
-            <FormLabel m={0}>Brand Logo</FormLabel>
-            <Input
-              pt={1}
-              type={"file"}
-              name="logo"
-              onChange={onImage}
-              borderColor="black"
-              bg="#fff"
-            />
-            <HStack pt={3}>
-              <Button
-                colorScheme={"blue"}
-                isLoading={isLoading}
-                onClick={createBrand}
-                disabled={!brand.name || !brand.img ? true : false}
-              >
-                Create
-              </Button>
-              <Button colorScheme={"red"} onClick={toggle}>
-                Close
-              </Button>
-            </HStack>
-          </Box>
-        </FormLayout>
-      ) : (
-        <Button colorScheme={"blackAlpha"} onClick={toggle}>
-          Add Brand
-        </Button>
-      )}
+      <Modal isOpen={isOpen} onClose={onClose} size={modalSize} isCentered>
+        <ModalOverlay />
+        <ModalContent bg="#DDD" p={5} pt={10}>
+          <ModalBody textAlign={"center"}>
+            <Box borderRadius={"md"}>
+              <Input
+                autoComplete="off"
+                placeholder="Brand name"
+                name="brand"
+                onChange={onBrand}
+                borderColor="black"
+                my={1}
+                bg="#fff"
+              />
+              <FormLabel m={0}>Brand Logo</FormLabel>
+              <Input
+                pt={1}
+                type={"file"}
+                name="logo"
+                onChange={onImage}
+                borderColor="black"
+                bg="#fff"
+              />
+              <HStack pt={3}>
+                <Button
+                  colorScheme={"blue"}
+                  isLoading={isLoading}
+                  onClick={createBrand}
+                  disabled={!brand.name || !brand.img ? true : false}
+                >
+                  Create
+                </Button>
+                <Button colorScheme={"red"} onClick={onClose}>
+                  Close
+                </Button>
+              </HStack>
+            </Box>
+          </ModalBody>
+
+          <ModalFooter></ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Button colorScheme={"blackAlpha"} onClick={onOpen}>
+        Add Brand
+      </Button>
     </>
   );
 };

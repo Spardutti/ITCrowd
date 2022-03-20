@@ -47,14 +47,16 @@ const Login: React.FC<LoginProps> = () => {
         onChange={onChange}
         borderColor="black"
         my={1}
+        bg="#fff"
       />
 
       <Input
+        autoComplete="off"
         name="password"
         value={userInfo.password}
         placeholder="Password"
         onChange={onChange}
-        bg="#fafafa"
+        bg="#fff"
         borderColor="black"
       />
       <HStack justify={"center"} mt={5}>
