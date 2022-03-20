@@ -6,6 +6,7 @@ import Panel from "./Components/Admin/Panel";
 function App() {
   return (
     <HashRouter>
+      <style>{"body {background-color: #111; }"}</style>
       <Routes>
         <Route path="/" element={<WelcomeScreen />} />
         <Route path="/products" element={<Products />} />

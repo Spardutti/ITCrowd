@@ -1,4 +1,4 @@
-import { Button, HStack, Input } from "@chakra-ui/react";
+import { Box, Button, FormLabel, HStack, Input } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNewBrand } from "../../Api/Brands/post_brand";
@@ -63,17 +63,41 @@ const AddBrand: React.FC<AddBrandProps> = () => {
     <>
       {show ? (
         <FormLayout>
-          <Input placeholder="Brand name" name="brand" onChange={onBrand} />
-          <Input type={"file"} name="logo" onChange={onImage} />
-          <HStack>
-            <Button isLoading={isLoading} onClick={createBrand}>
-              Create
-            </Button>
-            <Button onClick={toggle}>Close</Button>
-          </HStack>
+          <Box bg="#fafafa" p={5} borderRadius={"md"}>
+            <Input
+              placeholder="Brand name"
+              name="brand"
+              onChange={onBrand}
+              borderColor="black"
+              my={1}
+            />
+            <FormLabel m={0}>Brand Logo</FormLabel>
+            <Input
+              pt={1}
+              type={"file"}
+              name="logo"
+              onChange={onImage}
+              borderColor="black"
+            />
+            <HStack pt={3}>
+              <Button
+                colorScheme={"blue"}
+                isLoading={isLoading}
+                onClick={createBrand}
+                disabled={!brand.name || !brand.img ? true : false}
+              >
+                Create
+              </Button>
+              <Button colorScheme={"red"} onClick={toggle}>
+                Close
+              </Button>
+            </HStack>
+          </Box>
         </FormLayout>
       ) : (
-        <Button onClick={toggle}>Add Brand</Button>
+        <Button colorScheme={"orange"} onClick={toggle}>
+          Add Brand
+        </Button>
       )}
     </>
   );

@@ -1,4 +1,4 @@
-import { Button, HStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalLogin } from "../../Api/User/post_user";
@@ -19,7 +19,7 @@ const Admin: React.FC<AdminProps> = () => {
     const response = await local(adminInfo);
     if (response.status === 200) {
       localStorage.setItem("itcrowd", response.data.token);
-      navigate("/admin");
+      navigate("/products");
     }
   };
 
@@ -36,14 +36,19 @@ const Admin: React.FC<AdminProps> = () => {
   };
 
   return (
-    <HStack>
-      <Button isLoading={isLocal} onClick={adminLogin}>
-        Admin
-      </Button>
-      <Button isLoading={isGuest} onClick={guestLogin}>
-        Guest
-      </Button>
-    </HStack>
+    <VStack justify={"center"} mt={5}>
+      <Text fontWeight={"medium"} textAlign={"center"}>
+        Log in with our demo accounts
+      </Text>
+      <HStack>
+        <Button colorScheme={"blue"} isLoading={isLocal} onClick={adminLogin}>
+          Admin
+        </Button>
+        <Button colorScheme={"blue"} isLoading={isGuest} onClick={guestLogin}>
+          Guest
+        </Button>
+      </HStack>
+    </VStack>
   );
 };
 

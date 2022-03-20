@@ -1,4 +1,4 @@
-import { Modal, useDisclosure } from "@chakra-ui/react";
+import { Box, Modal, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import ReactSearchBox from "react-search-box";
 import {
@@ -61,7 +61,7 @@ const ProductSearch: React.FC<ProductSearchProps> = () => {
   }, [productId]);
 
   return (
-    <>
+    <Box w={200}>
       <ReactSearchBox
         data={products}
         placeholder="Search products"
@@ -79,7 +79,7 @@ const ProductSearch: React.FC<ProductSearchProps> = () => {
           product={productInfo.data}
         />
       )}
-    </>
+    </Box>
   );
 };
 

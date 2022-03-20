@@ -1,10 +1,11 @@
-import { Button, HStack, Input } from "@chakra-ui/react";
+import { Box, Button, FormLabel, HStack, Input } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useAllBrands } from "../../Api/Brands/get_brands";
 import { useNewProduct } from "../../Api/Products/post_product";
 import { Brand, Product } from "../../interface/interface";
 import FormLayout from "../User/FormLayout";
 import Select from "react-select";
+import toast from "react-hot-toast";
 
 interface AddProductProps {}
 
@@ -14,7 +15,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
     _id: "",
     name: "",
     description: "",
-    price: "0",
+    price: "",
     brand: {
       name: "",
       logo_url: "",
@@ -76,49 +77,90 @@ const AddProduct: React.FC<AddProductProps> = () => {
         logo,
       };
       const response = await mutateAsync(info);
+      if (response.status === 200) {
+        toast.success("Product created");
+        setBrandId("");
+        setProduct({
+          ...product,
+          name: "",
+          description: "",
+          price: "",
+        });
+      }
+      toggle();
     }
   };
 
   return show ? (
     <FormLayout>
-      <Input
-        name="name"
-        value={product.name}
-        onChange={onChange}
-        placeholder="Product name"
-      />
-      <Input
-        name="description"
-        value={product.description}
-        onChange={onChange}
-        placeholder="Product description"
-      />
-      <Input
-        name="price"
-        value={product.price}
-        onChange={onChange}
-        placeholder="Product price"
-      />
-      <Input type="file" name="logo" onChange={onLogo} />
-      {/*      <select>
-        {brands.map((brand: Brand) => {
-          return (
-            <option key={brand._id} value={brand._id}>
-              {brand.name}
-            </option>
-          );
-        })}
-      </select> */}
-      <Select options={brands} onChange={(e: any) => setBrandId(e?.value)} />
-      <HStack>
-        <Button onClick={createProduct} isLoading={isLoading}>
-          Create Product
-        </Button>
-        <Button onClick={toggle}>Close</Button>
-      </HStack>
+      <Box bg="#fafafa" p={5} borderRadius={"md"}>
+        <Input
+          name="name"
+          value={product.name}
+          onChange={onChange}
+          placeholder="Product name"
+          borderColor={"black"}
+          my={1}
+        />
+        <Input
+          name="description"
+          value={product.description}
+          onChange={onChange}
+          placeholder="Product description"
+          borderColor={"black"}
+          my={1}
+        />
+        <Input
+          name="price"
+          value={product.price}
+          onChange={onChange}
+          placeholder="Product price"
+          borderColor={"black"}
+          my={1}
+          type="number"
+        />
+        <FormLabel m={0}>Product logo</FormLabel>
+        <Input
+          type="file"
+          name="logo"
+          onChange={onLogo}
+          p={1}
+          borderColor={"black"}
+          my={1}
+        />
+
+        <Select
+          placeholder="Select a brand"
+          options={brands}
+          onChange={(e: any) => setBrandId(e?.value)}
+        />
+        <HStack mt={1} justify="center">
+          <Button
+            colorScheme={"blue"}
+            onClick={createProduct}
+            isLoading={isLoading}
+            disabled={
+              !product.name ||
+              !product.description ||
+              !product.price ||
+              !logo ||
+              !brandId
+                ? true
+                : false
+            }
+          >
+            Create Product
+          </Button>
+          <Button colorScheme={"red"} onClick={toggle}>
+            Close
+          </Button>
+        </HStack>
+      </Box>
     </FormLayout>
   ) : (
-    <Button onClick={toggle}>Add Product</Button>
+    <Button colorScheme={"orange"} onClick={toggle}>
+      Add Product
+    </Button>
   );
 };
 

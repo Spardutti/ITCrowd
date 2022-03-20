@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 import React from "react";
 import Admin from "../User/Admin";
 import Login from "../User/Login";
@@ -8,13 +8,13 @@ interface WelcomeScreenProps {}
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
   return (
-    <Box>
-      <Box w={400}>
-        <NewUser />
-        <Login />
+    <VStack justify={"center"} align="center" h={"100vh"}>
+      <Box bg={"#f1f1f1"} borderRadius="md">
         <Admin />
+        <Login />
+        <NewUser />
       </Box>
-    </Box>
+    </VStack>
   );
 };
 

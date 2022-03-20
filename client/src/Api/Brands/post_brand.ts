@@ -16,7 +16,7 @@ const newBrand = (info: { name: string; token: string | null; logo: File }) => {
       Authorization: `Bearer ${info.token}`,
     },
   }).catch((error) => {
-    throw error.response;
+    return error.response;
   });
 };
 

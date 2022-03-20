@@ -10,7 +10,7 @@ const newUser = (userInfo: { username: string; password: string }) => {
       password: userInfo.password,
     })
     .catch((error) => {
-      throw error.response;
+      return error.response;
     });
 };
 
@@ -26,7 +26,7 @@ const localLogin = (userInfo: { username: string; password: string }) => {
       password: userInfo.password,
     })
     .catch((error) => {
-      throw error.response;
+      return error.response;
     });
 };
 

@@ -18,6 +18,7 @@ interface ProductModalProps {
   onClose: () => void;
   product: Product;
 }
+
 const ProductModal: React.FC<ProductModalProps> = ({
   isOpen,
   onClose,
@@ -28,15 +29,17 @@ const ProductModal: React.FC<ProductModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{name}</ModalHeader>
-        {/* <ModalCloseButton /> */}
-        <ModalBody>
-          <Image src={image_url} />
+        <ModalHeader textAlign={"center"} fontWeight="bold" fontSize={30}>
+          {name}
+        </ModalHeader>
+        <ModalBody textAlign={"center"}>
+          <Image src={image_url} borderRadius="md" />
           <Text>{description}</Text>
           <Text>Price: {price}$</Text>
+          <Text fontWeight={"medium"}>Brand</Text>
           <HStack justify="space-around">
             <Text>{brand.name}</Text>
-            <Image src={brand.logo_url} h={100} />
+            <Image src={brand.logo_url} h={100} borderRadius="md" />
           </HStack>
         </ModalBody>
 

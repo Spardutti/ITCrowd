@@ -12,7 +12,9 @@ const getUser = (token: string) => {
 };
 
 const useGetUser = (token: string) => {
-  return useQuery(["user", token], () => getUser(token));
+  return useQuery(["user", token], () => getUser(token), {
+    enabled: false,
+  });
 };
 
 export { useGetUser };

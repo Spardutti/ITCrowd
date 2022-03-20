@@ -7,10 +7,10 @@ interface PanelProps {}
 
 const Panel: React.FC<PanelProps> = () => {
   return (
-    <Box>
+    <HStack>
       <AddBrand />
       <AddProduct />
-    </Box>
+    </HStack>
   );
 };
 

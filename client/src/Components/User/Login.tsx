@@ -1,4 +1,4 @@
-import { Button, Input, Stack } from "@chakra-ui/react";
+import { Button, HStack, Input, Stack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useLocalLogin } from "../../Api/User/post_user";
 import { useNavigate } from "react-router-dom";
@@ -35,11 +35,16 @@ const Login: React.FC<LoginProps> = () => {
 
   return (
     <FormLayout>
+      <Text textAlign={"center"} fontWeight="medium">
+        Log in
+      </Text>
       <Input
         name="username"
         value={userInfo.username}
         placeholder="Username"
         onChange={onChange}
+        borderColor="black"
+        my={1}
       />
 
       <Input
@@ -47,10 +52,19 @@ const Login: React.FC<LoginProps> = () => {
         value={userInfo.password}
         placeholder="Password"
         onChange={onChange}
+        bg="#fafafa"
+        borderColor="black"
       />
-      <Button isLoading={isLoading} onClick={login}>
-        Login
-      </Button>
+      <HStack justify={"center"} mt={5}>
+        <Button
+          disabled={!userInfo.username || !userInfo.password ? true : false}
+          colorScheme={"green"}
+          isLoading={isLoading}
+          onClick={login}
+        >
+          Login
+        </Button>
+      </HStack>
     </FormLayout>
   );
 };

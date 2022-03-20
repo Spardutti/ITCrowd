@@ -1,4 +1,4 @@
-import { Button, Input, Stack } from "@chakra-ui/react";
+import { Button, HStack, Input, Stack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNewUser } from "../../Api/User/post_user";
@@ -24,33 +24,49 @@ const NewUser: React.FC<NewUserProps> = () => {
   /* CREATES NEW USER */
   const newUser = async () => {
     const response = await mutateAsync(userInfo);
+
     if (response.status === 200) {
       toast.success("Account created succesfully");
       setUserInfo({
         username: "",
         password: "",
       });
+      return;
     }
+    toast.error(response.data.username);
   };
 
   return (
     <FormLayout>
+      <Text textAlign={"center"} fontWeight="medium">
+        Create account
+      </Text>
       <Input
+        my={1}
         name="username"
         value={userInfo.username}
         placeholder="Username"
         onChange={onChange}
+        borderColor="black"
       />
 
       <Input
+        borderColor="black"
         name="password"
         value={userInfo.password}
         placeholder="Password"
         onChange={onChange}
       />
-      <Button isLoading={isLoading} onClick={newUser}>
-        hit me
-      </Button>
+      <HStack justify={"center"} mt={5}>
+        <Button
+          disabled={!userInfo.username || !userInfo.password ? true : false}
+          colorScheme={"green"}
+          isLoading={isLoading}
+          onClick={newUser}
+        >
+          Sign up
+        </Button>
+      </HStack>
     </FormLayout>
   );
 };
