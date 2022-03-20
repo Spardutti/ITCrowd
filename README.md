@@ -2,8 +2,6 @@
 
 [Demo](https://spardutti.github.io/ITCrowd/#/)
 
-[Repo](https://github.com/Spardutti/ITCrowd)
-
 ## Description
 
 RESTfull webapp, where the user can navigate and search for different products,
