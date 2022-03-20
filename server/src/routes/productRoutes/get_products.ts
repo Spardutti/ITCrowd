@@ -10,6 +10,6 @@ const router = Router();
 router.get("/", getAllProducts);
 
 /* GET SINGLE PRODUCT */
-router.get("/product", getProduct);
+router.get("/product/:id", getProduct);
 
 export { router };

@@ -9,11 +9,6 @@ declare global {
       CLOUD_NAME: string;
     }
   }
-  namespace Express {
-    interface User {
-      _id: string;
-    }
-  }
 }
 
 export {};

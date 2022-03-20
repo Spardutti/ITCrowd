@@ -9,6 +9,7 @@ export const addBrand = async (
 ) => {
   try {
     const { name } = req.body;
+
     const brand = new BrandModel({
       name,
       logo_url: req.file?.path,

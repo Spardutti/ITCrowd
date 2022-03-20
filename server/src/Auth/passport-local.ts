@@ -4,25 +4,19 @@ import { UserModel } from "../models/User";
 import bcrypt from "bcryptjs";
 
 passport.use(
-  new LocalStrategy(
-    {
-      usernameField: "email",
-    },
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await UserModel.findOne({ username: username });
+      if (!user) return done(null, false);
 
-    async (username, password, done) => {
-      try {
-        const user = await UserModel.findOne({ email: username });
-        if (!user) return done(null, false);
-
-        bcrypt.compare(password, user.password, (err, isMatch) => {
-          if (isMatch) return done(null, user);
-          else return done(null, false);
-        });
-      } catch (error) {
-        return error;
-      }
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (isMatch) return done(null, user);
+        else return done(null, false);
+      });
+    } catch (error) {
+      return error;
     }
-  )
+  })
 );
 
 passport.serializeUser((user: any, done) => {

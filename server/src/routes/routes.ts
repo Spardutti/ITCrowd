@@ -22,7 +22,9 @@ router.use(deleteProduct);
 
 /* USER */
 import { router as postUser } from "../routes/userRoutes/post_user";
+import { router as getUser } from "../routes/userRoutes/get_user";
 
+router.use(getUser);
 router.use(postUser);
 
 export { router };

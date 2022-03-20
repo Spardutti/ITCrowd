@@ -9,42 +9,25 @@ require("dotenv").config();
 /* CREATE NEW USER */
 const newUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { username, email, password } = req.body;
-    async.parallel(
-      {
-        email: function (callback) {
-          UserModel.findOne({ email }).exec(callback);
-        },
-        username: function (callback) {
-          UserModel.findOne({ username }).exec(callback);
-        },
-      },
-      (err, results) => {
+    const { username, password } = req.body;
+
+    const user = await UserModel.findOne({ username });
+    if (user) {
+      return res.status(500).json({ username: "Username already in use" });
+    } else {
+      bcrypt.hash(password, 10, (err, hash) => {
+        if (err) return next(err);
         if (err) return next(err);
 
-        if (results.username) {
-          return res.status(500).json({ username: "Username already in use" });
-        }
-
-        if (results.email) {
-          return res.status(500).json({ email: "Email already in use" });
-        } else {
-          bcrypt.hash(password, 10, (err, hash) => {
-            if (err) return next(err);
-            if (err) return next(err);
-
-            new UserModel({
-              username,
-              email,
-              password: hash,
-            }).save((err, user) => {
-              if (err) return next(err);
-              res.status(200).json(user);
-            });
-          });
-        }
-      }
-    );
+        new UserModel({
+          username,
+          password: hash,
+        }).save((err, user) => {
+          if (err) return next(err);
+          res.status(200).json(user);
+        });
+      });
+    }
   } catch (error) {
     return next(error);
   }

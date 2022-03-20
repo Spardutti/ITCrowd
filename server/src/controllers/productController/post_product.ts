@@ -6,6 +6,8 @@ import { BrandModel } from "../../models/Brand";
 const addProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { name, description, price, brandId } = req.body;
+    console.log(req.body);
+
     const brand = await BrandModel.findById(brandId);
     if (!brand) return res.status(404).json("Brand not found");
 
