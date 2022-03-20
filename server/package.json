@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "dev": "nodemon ./src/app.ts",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "postinstall": "tsc"
   },
   "dependencies": {
     "@types/async": "^3.2.12",
@@ -46,3 +47,4 @@
     "nodemon": "^2.0.15"
   }
 }
+

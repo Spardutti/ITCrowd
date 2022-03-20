@@ -1,5 +1,6 @@
 import { ProductModel } from "../../models/Products";
 import { Request, Response, NextFunction } from "express";
+import { BrandModel } from "../../models/Brand";
 
 /* UPDATE PRODUCT */
 const updateProduct = async (
@@ -8,13 +9,19 @@ const updateProduct = async (
   next: NextFunction
 ) => {
   try {
-    const { name, description, image_url, price, brand, id } = req.body;
+    const { name, description, price, brandId, productId } = req.body;
+
+    const brand = await BrandModel.findById(brandId);
+    if (!brand) return res.status(404).json("brand not found");
+
     const product = await ProductModel.findOneAndUpdate(
-      id,
+      {
+        _id: productId,
+      },
       {
         name,
         description,
-        image_url,
+        image_url: req.file?.path,
         price,
         brand,
       },

@@ -8,7 +8,7 @@ const deleteProduct = async (
   next: NextFunction
 ) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     const product = await ProductModel.findByIdAndDelete(id);
     res.status(200).json(`producte deleted ${product}`);
   } catch (error) {
