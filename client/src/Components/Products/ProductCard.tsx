@@ -66,70 +66,73 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   }, [data]);
 
   const buttonSize = useBreakpointValue(["xs", "sm", "md"]);
-  const MotionStack = motion(VStack);
   return (
-    <MotionStack
+    <motion.div
       whileHover={{
-        scale: [1, 1.1],
-        rotate: [0, -5],
-        transition: { duration: 0.1 },
+        scale: 1.1,
+        rotate: -5,
+        transition: { duration: 0.3 },
       }}
-      w={[150, 200, 250, 300, 400]}
-      maxH={[300, 400]}
-      bg="#DDD"
-      py={5}
-      px={2}
-      m={[2, 5, 10]}
-      borderRadius="lg"
-      onClick={onOpen}
-      cursor="pointer"
     >
-      <Stack align={"center"} justify="center" h={200}>
-        <Image
-          src={image_url}
-          maxW={[150, 200, 250, 350]}
-          maxH={200}
-          borderRadius="lg"
-        />
-      </Stack>
-      <Heading
-        fontSize={name.length > 16 ? [13, 20] : [20, 20]}
-        textAlign={"center"}
-        h={[5, 10]}
+      <VStack
+        /*      */
+        w={[150, 200, 250, 300, 400]}
+        maxH={[300, 400]}
+        bg="#DDD"
+        py={5}
+        px={2}
+        m={[2, 5, 10]}
+        borderRadius="lg"
+        onClick={onOpen}
+        cursor="pointer"
       >
-        {name}
-      </Heading>
-      <Text textAlign={"center"}>Price: {price}$</Text>
-      {user && user.isAdmin ? (
-        <HStack justify={"center"} onClick={(e) => e.stopPropagation()}>
-          <Button
-            colorScheme={"green"}
-            leftIcon={<FaEdit />}
-            onClick={onEditOpen}
-            size={buttonSize}
-          >
-            Edit
-          </Button>
-          <Button
-            size={buttonSize}
-            colorScheme={"red"}
-            leftIcon={<AiFillDelete />}
-            onClick={deleteProduct}
-            isLoading={isDeleting}
-          >
-            Delete
-          </Button>
-        </HStack>
-      ) : null}
-      <ProductModal isOpen={isOpen} onClose={onClose} product={product} />
-      {isEdit && (
-        <EditModal
-          isEdit={isEdit}
-          onEditClose={onEditClose}
-          product={product}
-        />
-      )}
-    </MotionStack>
+        <Stack align={"center"} justify="center" h={200}>
+          <Image
+            src={image_url}
+            maxW={[150, 200, 250, 350]}
+            maxH={200}
+            borderRadius="lg"
+          />
+        </Stack>
+        <Heading
+          fontSize={name.length > 16 ? [13, 20] : [20, 20]}
+          textAlign={"center"}
+          h={[5, 10]}
+        >
+          {name}
+        </Heading>
+        <Text textAlign={"center"}>Price: {price}$</Text>
+        {user && user.isAdmin ? (
+          <HStack justify={"center"} onClick={(e) => e.stopPropagation()}>
+            <Button
+              colorScheme={"green"}
+              leftIcon={<FaEdit />}
+              onClick={onEditOpen}
+              size={buttonSize}
+            >
+              Edit
+            </Button>
+            <Button
+              size={buttonSize}
+              colorScheme={"red"}
+              leftIcon={<AiFillDelete />}
+              onClick={deleteProduct}
+              isLoading={isDeleting}
+            >
+              Delete
+            </Button>
+          </HStack>
+        ) : null}
+        <ProductModal isOpen={isOpen} onClose={onClose} product={product} />
+        {isEdit && (
+          <EditModal
+            isEdit={isEdit}
+            onEditClose={onEditClose}
+            product={product}
+          />
+        )}
+      </VStack>
+    </motion.div>
   );
 };
 

@@ -45,6 +45,10 @@ const EditModal: React.FC<EditModalProps> = ({
   });
   const [token, setToken] = useState("");
 
+  useEffect(() => {
+    console.log(product._id);
+  }, []);
+
   /* GET BRANDS */
   const { data } = useAllBrands();
   useEffect(() => {
@@ -83,27 +87,26 @@ const EditModal: React.FC<EditModalProps> = ({
 
   const { mutateAsync, isLoading } = useUpdateProduct();
   const update = async () => {
-    if (logo) {
-      const info = {
-        product: updateProduct,
-        token,
-        brandId,
-        logo,
-        productId: product._id,
-      };
-      const response = await mutateAsync(info);
-      if (response.status === 200) {
-        toast.success("Product updated");
-        setBrandId("");
-        setUpdateProduct({
-          ...product,
-          name: "",
-          description: "",
-          price: "",
-        });
-        onEditClose();
-        queryClient.invalidateQueries("products");
-      }
+    const info = {
+      product: updateProduct,
+      token,
+      brandId,
+      productId: product._id,
+      logo,
+    };
+
+    const response = await mutateAsync(info);
+    if (response.status === 200) {
+      toast.success("Product updated");
+      setBrandId("");
+      setUpdateProduct({
+        ...product,
+        name: "",
+        description: "",
+        price: "",
+      });
+      onEditClose();
+      queryClient.invalidateQueries();
     }
   };
 
@@ -173,7 +176,6 @@ const EditModal: React.FC<EditModalProps> = ({
                 !product.name ||
                 !product.description ||
                 !product.price ||
-                !logo ||
                 !brandId
                   ? true
                   : false

@@ -11,6 +11,7 @@ import {
   Text,
   HStack,
   Stack,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { Product } from "../../interface/interface";
 
@@ -26,8 +27,10 @@ const ProductModal: React.FC<ProductModalProps> = ({
   product,
 }) => {
   const { name, description, image_url, brand, price } = product;
+  const modalSize = useBreakpointValue(["xs", "sm", "md"]);
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size={modalSize}>
       <ModalOverlay />
       <ModalContent bg={"#DDD"}>
         <ModalHeader textAlign={"center"} fontWeight="bold" fontSize={30}>

@@ -6,7 +6,7 @@ import { Product } from "../../interface/interface";
 /* UPDATE PRODUCT */
 const updateProduct = (info: {
   product: Product;
-  logo: File;
+  logo: File | undefined;
   brandId: string;
   token: string;
   productId: string;
@@ -14,7 +14,9 @@ const updateProduct = (info: {
   const { name, description, price } = info.product;
 
   let formData = new FormData();
-  formData.append("logo", info.logo);
+  if (info.logo) {
+    formData.append("logo", info.logo);
+  }
   formData.append("name", name);
   formData.append("description", description);
   formData.append("price", price);
