@@ -15,7 +15,7 @@ Framer-Motion for animations, React Hot Toast for toasts messages, React Router,
 Back End was made using Multer for file uploads, Cloudinary as image hosting, Passport and Jwt for authentication, BcryptJs for encription of passwords, MongoDb as the database.
 
 The api workflow is: you log in as admin, create a brand (you cant create a product without a brand ), create a product.
-As an user you can browser the products and search products by name.
+As an user you can browse the products and search products by name.
 
 The client is hosted in GitHub, and the server is hosted in Heroku.
 
