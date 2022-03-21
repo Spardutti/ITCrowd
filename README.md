@@ -27,7 +27,7 @@ The api expose various endpoints, as requested all are /products/${endpoint}
 
 /brands - get a list of all brands
 
-/ - get all products
+/get all products
 /product/:id - get a specific product by its id
 
 /user - get the current logged user info
