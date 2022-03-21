@@ -54,8 +54,12 @@ The api expose various endpoints, as requested all are /products/${endpoint}
 
 To run the project locally:
 
-1- clone the repo. 
-1.1- ask the owner for the .env file. 
+1- clone the repo
+
+
+1.1- ask the owner for the .env file
+
+
 2- open the server folder in VsCode or any other IDE
 ```
 npm i // to install all dependencies
